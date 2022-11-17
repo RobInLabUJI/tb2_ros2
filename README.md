@@ -27,10 +27,18 @@ roslaunch turtlebot_navigation scan.launch
 
 ### Terminal 3
 ```
+docker compose up
 ```
 
 ### Terminal 4
 ```
+xhost +
+docker run --env="USER=eiforamr" --name ei4amr-full \
+  --env="DISPLAY=$DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix \
+  --network host --ipc host --rm -it eiforamr-full-flavour-sdk:2022.3 \
+  /bin/bash
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 ### Terminal 5
