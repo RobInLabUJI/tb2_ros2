@@ -32,6 +32,30 @@ services:
     network_mode: host
     ipc: host
         
+  ros2-tf-relay:
+    image: ros2-topic-relay
+    environment:
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    command: "ros2 run topic_tools relay /tf_ros1 /tf --ros-args --remap __node:=relay_tf"
+    network_mode: host
+    ipc: host
+    
+  ros2-tf-static-relay:
+    image: ros2-topic-relay
+    environment:
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    command: "ros2 run topic_tools relay /tf_static_ros1 /tf_static --ros-args --remap __node:=relay_tf_static"
+    network_mode: host
+    ipc: host
+    
   ros2-static-tf-bf-bl:
     image: ros:foxy-ros-base-focal
     environment:

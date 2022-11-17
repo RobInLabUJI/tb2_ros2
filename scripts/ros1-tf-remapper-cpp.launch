@@ -1,0 +1,12 @@
+<launch>
+
+    <node name="tf_remapper" pkg="tf_remapper_cpp" type="tf_remap">
+        <rosparam param="mappings">[{old: tf, new: tf_ros1}]</rosparam>
+    </node>
+
+    <node name="tf_static_remapper" pkg="tf_remapper_cpp" type="tf_remap">
+        <rosparam param="mappings">[{old: tf_static, new: tf_static_ros1}]</rosparam>
+        <param name="static_tf" value="true" />
+    </node>
+    
+</launch>

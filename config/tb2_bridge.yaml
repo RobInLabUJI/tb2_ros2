@@ -8,11 +8,11 @@ topics:
     type: geometry_msgs/msg/Twist
     queue_size: 1
   -
-    topic: /tf
+    topic: /tf_ros1
     type: tf2_msgs/msg/TFMessage
     queue_size: 1
   -
-    topic: /tf_static
+    topic: /tf_ros1_static
     type: tf2_msgs/msg/TFMessage
     queue_size: 1
     qos:
