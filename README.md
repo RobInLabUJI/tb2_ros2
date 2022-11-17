@@ -34,21 +34,30 @@ docker compose up
 ```
 xhost +
 docker run --env="USER=eiforamr" --name ei4amr-full \
-  --env="DISPLAY=$DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix \
+  --env="DISPLAY=$DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/config:/config \
   --network host --ipc host --rm -it eiforamr-full-flavour-sdk:2022.3 \
   /bin/bash
 
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+rviz2 -d /config/nav.rviz
 ```
 
 ### Terminal 5
 ```
+docker exec -it ei4amr-full /bin/bash
+source /opt/ros/foxy/setup.bash
+ros2 launch nav2_bringup navigation_launch.py
 ```
 
 ### Terminal 6
 ```
+docker exec -it ei4amr-full /bin/bash
+source /opt/ros/foxy/setup.bash
+ros2 launch slam_toolbox online_async_launch.py
 ```
 
 ### Terminal 7
 ```
+docker exec -it ei4amr-full /bin/bash
+source /opt/ros/foxy/setup.bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
