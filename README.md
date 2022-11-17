@@ -47,14 +47,14 @@ rviz2 -d /config/nav.rviz
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
-ros2 launch nav2_bringup navigation_launch.py
+ros2 launch nav2_bringup naviga tion_launch.py use_sim_time:=false
 ```
 
 ### Terminal 6
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
-ros2 launch slam_toolbox online_async_launch.py
+ros2 launch slam_toolbox online_async_launch.py use_sim_time:=false
 ```
 
 ### Terminal 7
