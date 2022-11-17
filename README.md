@@ -1,5 +1,7 @@
 # tb2_ros2
 
+**IMPORTANT**: check the value of ROS_IP in `docker-compose.yaml`
+
 ### Terminal 1
 ```
 ssh pi@192.168.0.114
