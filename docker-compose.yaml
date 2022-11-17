@@ -1,0 +1,57 @@
+---
+version: '3.7'
+
+services:
+  ros1-bridge:
+    image: amr-ros1-bridge:2022.3
+    environment:
+      ROS_MASTER_URI: "http://192.168.0.114:11311"
+      USER: "eiforamr"
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+      - type: bind
+        source: ./scripts
+        target: /scripts
+    command: "/scripts/ros1-bridge.bash"
+    network_mode: host
+    ipc: host
+        
+  ros2-cmd-vel-relay:
+    image: ros2-topic-relay
+    environment:
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    command: "ros2 run topic_tools relay /cmd_vel /cmd_vel_mux/input/navi --ros-args --remap __node:=relay_cmd_vel"
+    network_mode: host
+    ipc: host
+        
+  ros2-static-tf-bf-bl:
+    image: ros:foxy-ros-base-focal
+    environment:
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    command: "ros2 run tf2_ros static_transform_publisher 0 0 0.01 0 0 0 1 base_footprint base_link"
+    network_mode: host
+    ipc: host
+    
+  ros2-static-tf-bl-cdf:
+    image: ros:foxy-ros-base-focal
+    environment:
+      FASTRTPS_DEFAULT_PROFILES_FILE: "/config/disable_shm.xml"
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    command: "ros2 run tf2_ros static_transform_publisher -0.087 0.048 0.287 0 0 0 1 base_link camera_depth_frame"
+    network_mode: host
+    ipc: host
+    
