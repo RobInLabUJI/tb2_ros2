@@ -1,6 +1,6 @@
 # tb2_ros2
 
-**IMPORTANT**: check the value of ROS_IP in `docker-compose.yaml`
+**IMPORTANT**: check the values of ROS_IP and ROS_MASTER_URI in `docker-compose.yaml`
 
 ### Terminal 1
 ```
@@ -58,7 +58,7 @@ rviz2 -d /config/nav.rviz
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
-ros2 launch nav2_bringup naviga tion_launch.py use_sim_time:=false
+ros2 launch nav2_bringup navigation_launch.py use_sim_time:=false
 ```
 
 ### Terminal 7
