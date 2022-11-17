@@ -29,10 +29,21 @@ roslaunch turtlebot_navigation scan.launch
 
 ### Terminal 3
 ```
-docker compose up
+ssh pi@192.168.0.114
+
+source /opt/ros/noetic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+export ROS_IP=192.168.0.114
+export ROS_MASTER_URI=http://192.168.0.114:11311
+roslaunch ros1-tf-remapper-cpp.launch 
 ```
 
 ### Terminal 4
+```
+docker compose up
+```
+
+### Terminal 5
 ```
 xhost +
 docker run --env="USER=eiforamr" --name ei4amr-full \
@@ -43,21 +54,21 @@ docker run --env="USER=eiforamr" --name ei4amr-full \
 rviz2 -d /config/nav.rviz
 ```
 
-### Terminal 5
+### Terminal 6
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
 ros2 launch nav2_bringup naviga tion_launch.py use_sim_time:=false
 ```
 
-### Terminal 6
+### Terminal 7
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
 ros2 launch slam_toolbox online_async_launch.py use_sim_time:=false
 ```
 
-### Terminal 7
+### Terminal 8
 ```
 docker exec -it ei4amr-full /bin/bash
 source /opt/ros/foxy/setup.bash
